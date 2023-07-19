@@ -10,11 +10,11 @@ data class BankAccount(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column(name = "bank")
-    var bank: Int,
+    @Column(name = "bank", length = 3)
+    var bank: String,
 
-    @Column(name = "agency")
-    var agency: Int,
+    @Column(name = "agency", length = 4)
+    var agency: String,
 
     @Column(name = "account", length = 10)
     var account: String,

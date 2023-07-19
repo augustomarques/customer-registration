@@ -20,17 +20,15 @@ class BankAccountTest {
     @Test
     fun `should generate a bank account`() {
         val id = faker.number().randomNumber()
-        val bank = faker.number().numberBetween(100, 999)
-        val agency = faker.number().numberBetween(1000, 9990)
-        val account = faker.number().numberBetween(1000000, 9999999)
-        val accountDigit = faker.number().numberBetween(1, 9)
-        val accountNumber = account.toString().plus("-").plus(accountDigit)
+        val bank = faker.number().numberBetween(100, 999).toString()
+        val agency = faker.number().numberBetween(1000, 9990).toString()
+        val account = faker.number().numberBetween(1000000, 9999999).toString()
 
         val bankAccount = BankAccount(
             id = id,
             bank = bank,
             agency = agency,
-            account = accountNumber,
+            account = account,
             customer = customer
         )
 
@@ -39,7 +37,7 @@ class BankAccountTest {
         assertThat(bankAccount.id).isEqualTo(id)
         assertThat(bankAccount.bank).isEqualTo(bank)
         assertThat(bankAccount.agency).isEqualTo(agency)
-        assertThat(bankAccount.account).isEqualTo(accountNumber)
+        assertThat(bankAccount.account).isEqualTo(account)
         assertThat(bankAccount.customer).isEqualTo(customer)
     }
 }
