@@ -20,7 +20,7 @@ class DataCustomerTest {
             val id = faker.number().randomNumber()
             val companyName = faker.company().name()
             val phone = faker.phoneNumber().phoneNumberNational()
-            val declaredRevenue = BigDecimal.valueOf(faker.number().randomNumber())
+            val declaredRevenue = BigDecimal.valueOf(faker.number().randomDouble(0, 1L, 100000000L))
             val registrationDate = LocalDate.now()
 
             val zipCode = faker.address().zipCode()
