@@ -27,7 +27,7 @@ class BankAccountService(
     }
 
     fun getById(customerId: Long, id: Long): BankAccountView {
-        val bankAccount = getOneById(customerId, id)
+        val bankAccount = getOneByCustomerIdAndId(customerId, id)
         return mapToView(bankAccount)
     }
 
@@ -37,13 +37,13 @@ class BankAccountService(
 
     @Transactional
     fun delete(customerId: Long, id: Long) {
-        val bankAccount = getOneById(id, customerId)
+        val bankAccount = getOneByCustomerIdAndId(customerId, id)
         repository.delete(bankAccount)
     }
 
     @Transactional
     fun update(customerId: Long, id: Long, bankAccountForm: BankAccountForm): BankAccountView {
-        val bankAccount = getOneById(customerId, id)
+        val bankAccount = getOneByCustomerIdAndId(customerId, id)
 
         bankAccount.bank = bankAccountForm.bank
         bankAccount.agency = bankAccountForm.agency
@@ -52,7 +52,8 @@ class BankAccountService(
         return mapToView(bankAccount)
     }
 
-    private fun getOneById(customerId: Long, id: Long): BankAccount {
-        return repository.findByIdAndCustomerId(id, customerId).orElseThrow { NotFoundException(id) }
+    private fun getOneByCustomerIdAndId(customerId: Long, id: Long): BankAccount {
+        return repository.findByIdAndCustomerId(id, customerId)
+            .orElseThrow { NotFoundException("Bank account [id: $id] not found for customer [id: $customerId]") }
     }
 }

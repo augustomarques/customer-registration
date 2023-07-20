@@ -11,18 +11,17 @@ class DataBankAccountTest {
     companion object {
 
         fun generateRandomBankAccount(): BankAccount {
-            val faker = Faker()
+            return generateRandomBankAccount(Faker().number().randomNumber())
+        }
 
-            val id = faker.number().randomNumber()
-            val bank = faker.number().numberBetween(100, 999).toString()
-            val agency = faker.number().numberBetween(1000, 9999).toString()
-            val account = faker.number().numberBetween(1000000, 9999999).toString()
+        fun generateRandomBankAccount(id: Long): BankAccount {
+            val faker = Faker()
 
             return BankAccount(
                 id = id,
-                bank = bank,
-                agency = agency,
-                account = account,
+                bank = faker.number().numberBetween(100, 999).toString(),
+                agency = faker.number().numberBetween(1000, 9999).toString(),
+                account = faker.number().numberBetween(1000000, 9999999).toString(),
                 customer = mockk()
             )
         }

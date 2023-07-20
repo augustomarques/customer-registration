@@ -31,7 +31,7 @@ class CustomerService(private val repository: CustomerRepository) {
     }
 
     internal fun getOneById(id: Long): Customer {
-        return repository.findById(id).orElseThrow { NotFoundException(id) }
+        return repository.findById(id).orElseThrow { NotFoundException("Customer [id: $id] not found") }
     }
 
     fun listAllPaginated(pageable: Pageable): Page<CustomerView> {

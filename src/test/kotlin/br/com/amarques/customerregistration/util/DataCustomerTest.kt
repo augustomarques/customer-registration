@@ -18,33 +18,28 @@ class DataCustomerTest {
             val faker = Faker()
 
             val id = faker.number().randomNumber()
-            val companyName = faker.company().name()
-            val phone = faker.phoneNumber().phoneNumberNational()
-            val declaredRevenue = BigDecimal.valueOf(faker.number().randomDouble(0, 1L, 100000000L))
             val registrationDate = LocalDate.now()
 
-            val zipCode = faker.address().zipCode()
-            val state = faker.address().state()
-            val city = faker.address().city()
-            val neighborhood = faker.address().secondaryAddress()
-            val street = faker.address().streetName()
-            val number = faker.address().buildingNumber()
-            val complement = faker.address().fullAddress()
+            return generateRandomCustomer(id, registrationDate)
+        }
+
+        fun generateRandomCustomer(id: Long, registrationDate: LocalDate): Customer {
+            val faker = Faker()
 
             return Customer(
                 id = id,
-                companyName = companyName,
-                phone = phone,
-                declaredRevenue = declaredRevenue,
+                companyName = faker.company().name(),
+                phone = faker.phoneNumber().phoneNumberNational(),
+                declaredRevenue = BigDecimal.valueOf(faker.number().randomDouble(0, 1L, 100000000L)),
                 registrationDate = registrationDate,
                 address = Address(
-                    zipCode = zipCode,
-                    state = state,
-                    city = city,
-                    neighborhood = neighborhood,
-                    street = street,
-                    number = number,
-                    complement = complement
+                    zipCode = faker.address().zipCode(),
+                    state = faker.address().state(),
+                    city = faker.address().city(),
+                    neighborhood = faker.address().secondaryAddress(),
+                    street = faker.address().streetName(),
+                    number = faker.address().buildingNumber(),
+                    complement = faker.address().fullAddress()
                 )
             )
         }
