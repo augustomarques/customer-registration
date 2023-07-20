@@ -56,6 +56,7 @@ class CustomerControllerTest {
         mockMvc.get(RESOURCE.plus("/${customerId}"))
             .andExpect {
                 status { is2xxSuccessful() }
+                content { contentType(MediaType.APPLICATION_JSON) }
 
                 jsonPath("$.id") { value(customerView.id) }
                 jsonPath("$.companyName") { value(customerView.companyName) }
@@ -86,6 +87,7 @@ class CustomerControllerTest {
             content = objectMapper.writeValueAsString(customerForm)
         }.andExpect {
             status { isCreated() }
+            content { contentType(MediaType.APPLICATION_JSON) }
 
             jsonPath("$.id") { value(customerView.id) }
             jsonPath("$.companyName") { value(customerView.companyName) }
@@ -131,6 +133,7 @@ class CustomerControllerTest {
             content = objectMapper.writeValueAsString(updatedCustomerForm)
         }.andExpect {
             status { is2xxSuccessful() }
+            content { contentType(MediaType.APPLICATION_JSON) }
 
             jsonPath("$.id") { value(customerView.id) }
             jsonPath("$.companyName") { value(customerView.companyName) }
