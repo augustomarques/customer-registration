@@ -1,6 +1,8 @@
 package br.com.amarques.customerregistration.domain
 
 import jakarta.persistence.*
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 
 @Entity
 @Table(name = "bank_account")
@@ -21,5 +23,6 @@ data class BankAccount(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     val customer: Customer
 )
