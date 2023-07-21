@@ -5,7 +5,10 @@ import java.math.BigDecimal
 import java.time.LocalDate
 
 @Entity
-@Table(name = "customer")
+@Table(
+    name = "customer",
+    indexes = [Index(name = "idx_customer_sort", columnList = "registration_date DESC")]
+)
 @SecondaryTable(
     name = "address",
     pkJoinColumns = [PrimaryKeyJoinColumn(name = "customer_id")]
