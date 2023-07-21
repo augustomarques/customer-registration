@@ -29,7 +29,7 @@ class DataCustomerTest {
             return Customer(
                 id = id,
                 companyName = faker.company().name(),
-                phone = faker.phoneNumber().phoneNumberNational(),
+                phone = faker.phoneNumber().cellPhone(),
                 declaredRevenue = BigDecimal.valueOf(faker.number().randomDouble(0, 1L, 100000000L)),
                 registrationDate = registrationDate,
                 address = Address(
