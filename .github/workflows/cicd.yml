@@ -40,9 +40,6 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=augustomarques_customer-registration_AYlvpLQWMuLZSEg205yu -DskipUnitTests -DskipIntegrationTests
 
-      - name: Run maven package
-        run: mvn clean install -DskipUnitTests
-
       - name: Login container registry
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
