@@ -3,7 +3,7 @@ COPY pom.xml .
 RUN mvn dependency:go-offline
 
 COPY ./src ./src
-RUN mvn -B package -DskipUnitTests -DskipIntegrationTests
+RUN mvn -B clean package -DskipUnitTests -DskipIntegrationTests
 
 RUN cp target/*.jar application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
