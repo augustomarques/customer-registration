@@ -3,18 +3,20 @@ package br.com.amarques.customerregistration.controller
 import br.com.amarques.customerregistration.dto.form.CustomerForm
 import br.com.amarques.customerregistration.dto.view.CustomerView
 import br.com.amarques.customerregistration.service.CustomerService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.Pageable
-import org.springframework.data.domain.Sort.Direction.DESC
-import org.springframework.data.web.PageableDefault
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 
+@Tag(name = "Customers")
 @RestController
 @RequestMapping("/customers")
 class CustomerController(private val customerService: CustomerService) {
@@ -22,14 +24,25 @@ class CustomerController(private val customerService: CustomerService) {
     var logger: Logger = LoggerFactory.getLogger(CustomerController::class.java)
 
     @GetMapping
-    fun getAll(@PageableDefault(page = 0, size = 5, sort = ["registrationDate"], direction = DESC) pageable: Pageable)
-            : Page<CustomerView> {
+    @Operation(summary = "Search for registered customers")
+    fun getAll(
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "5") size: Int,
+        @RequestParam(defaultValue = "registrationDate") sortList: Array<String>,
+        @RequestParam(defaultValue = "DESC") sortOrder: String,
+    ): Page<CustomerView> {
         logger.info("REST request - Searching all customers by page")
 
-        return customerService.listAllPaginated(pageable)
+        val sortDirection = Sort.Direction.fromString(sortOrder)
+        val orderList = sortList.map { Sort.Order(sortDirection, it) }
+
+        val pageRequest = PageRequest.of(page, size, Sort.by(orderList))
+
+        return customerService.listAllPaginated(pageRequest)
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Searches for the registered customer by id")
     fun getOne(@PathVariable id: Long): CustomerView {
         logger.info("REST request - searching for a customer by ID [id: $id]")
 
@@ -37,6 +50,7 @@ class CustomerController(private val customerService: CustomerService) {
     }
 
     @PostMapping
+    @Operation(summary = "Register a new customer")
     fun create(@RequestBody @Valid customerForm: CustomerForm, uriComponentsBuilder: UriComponentsBuilder)
             : ResponseEntity<CustomerView> {
         logger.info("REST request - creating a new customer $customerForm")
@@ -48,6 +62,7 @@ class CustomerController(private val customerService: CustomerService) {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Updates the customer")
     fun update(@PathVariable id: Long, @RequestBody @Valid customerForm: CustomerForm)
             : ResponseEntity<CustomerView> {
         logger.info("REST request - updating the customer [id: $id] $customerForm")
@@ -59,6 +74,7 @@ class CustomerController(private val customerService: CustomerService) {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete the customer")
     fun delete(@PathVariable id: Long) {
         logger.info("REST request - deleting the customer [id: $id]")
 

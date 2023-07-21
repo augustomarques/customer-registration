@@ -3,6 +3,8 @@ package br.com.amarques.customerregistration.controller
 import br.com.amarques.customerregistration.dto.form.BankAccountForm
 import br.com.amarques.customerregistration.dto.view.BankAccountView
 import br.com.amarques.customerregistration.service.BankAccountService
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 
+@Tag(name = "Bank accounts")
 @RestController
 @RequestMapping("/customers/{customerId}/bank-accounts")
 class BankAccountController(private val bankAccountService: BankAccountService) {
@@ -18,6 +21,7 @@ class BankAccountController(private val bankAccountService: BankAccountService) 
     var logger: Logger = LoggerFactory.getLogger(BankAccountController::class.java)
 
     @GetMapping
+    @Operation(summary = "Search for registered bank accounts")
     fun getAll(@PathVariable customerId: Long): List<BankAccountView> {
         logger.info("REST request - Searching all bank accounts for customer [id: $customerId]")
 
@@ -25,6 +29,7 @@ class BankAccountController(private val bankAccountService: BankAccountService) 
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Searches for the registered bank account by id")
     fun getOne(@PathVariable customerId: Long, @PathVariable id: Long): BankAccountView {
         logger.info("REST request - searching for a bank account by customer [id: $customerId] and bankId [id: $id]")
 
@@ -32,6 +37,7 @@ class BankAccountController(private val bankAccountService: BankAccountService) 
     }
 
     @PostMapping
+    @Operation(summary = "Create a new bank account")
     fun create(
         @PathVariable customerId: Long, @RequestBody @Valid bankAccountForm: BankAccountForm,
         uriComponentsBuilder: UriComponentsBuilder
@@ -45,6 +51,7 @@ class BankAccountController(private val bankAccountService: BankAccountService) 
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Updates the bank account")
     fun update(
         @PathVariable customerId: Long, @PathVariable id: Long,
         @RequestBody @Valid bankAccountForm: BankAccountForm
@@ -59,6 +66,7 @@ class BankAccountController(private val bankAccountService: BankAccountService) 
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete the bank account")
     fun delete(@PathVariable customerId: Long, @PathVariable id: Long) {
         logger.info("REST request - deleting the bank account [id: $id] of customer [id: $customerId]")
 
