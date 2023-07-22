@@ -6,10 +6,10 @@ on:
 
 jobs:
   test-code-quality:
-    uses: ./.github/workflows/commons/tests.yml
+    uses: ./.github/workflows/tests.yml
     secrets: inherit
 
   deploy:
     needs: test-code-quality
-    uses: ./.github/workflows/commons/deploy.yml
+    uses: ./.github/workflows/deploy.yml
     secrets: inherit
