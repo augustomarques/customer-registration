@@ -1,10 +1,10 @@
-name: Sending reports to SonarCube
+name: Tests and code quality
 
 on:
   workflow_call:
 
 jobs:
-  sonarcube:
+  test-code-quality:
     runs-on: ubuntu-22.04
 
     steps:
@@ -18,19 +18,25 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Cache SonarQube packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
       - name: cache dependencies
         uses: actions/cache@v3
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
+      - name: Run unit tests
+        run: mvn -B test
+
+      - name: Run integration tests
+        run: mvn -B install -DskipUnitTests
+
+      - name: Cache SonarQube packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
       - name: Build and analyze
         env:
