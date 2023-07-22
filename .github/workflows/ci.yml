@@ -1,8 +1,8 @@
-name: CI-CD
+name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "!main" ]
 
 jobs:
   unit-test:
@@ -15,9 +15,4 @@ jobs:
   sonarcube:
     needs: integration-test
     uses: ./.github/workflows/sonarcube.yml
-    secrets: inherit
-
-  deploy:
-    needs: sonarcube
-    uses: ./.github/workflows/deploy.yml
     secrets: inherit
