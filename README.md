@@ -1,5 +1,8 @@
 # customer-registration
 
+[![CI-CD](https://github.com/augustomarques/customer-registration/actions/workflows/cicd.yml/badge.svg)](https://github.com/augustomarques/customer-registration/actions/workflows/cicd.yml)
+
+
 [![Bugs](https://sonarqube.augusto-dev.com/api/project_badges/measure?project=augustomarques_customer-registration_AYlvpLQWMuLZSEg205yu&metric=bugs&token=sqb_d627f6302542b0308ffbc513f86b12002b2d4f49)](https://sonarqube.augusto-dev.com/dashboard?id=augustomarques_customer-registration_AYlvpLQWMuLZSEg205yu)
 [![Code Smells](https://sonarqube.augusto-dev.com/api/project_badges/measure?project=augustomarques_customer-registration_AYlvpLQWMuLZSEg205yu&metric=code_smells&token=sqb_d627f6302542b0308ffbc513f86b12002b2d4f49)](https://sonarqube.augusto-dev.com/dashboard?id=augustomarques_customer-registration_AYlvpLQWMuLZSEg205yu)
 [![Coverage](https://sonarqube.augusto-dev.com/api/project_badges/measure?project=augustomarques_customer-registration_AYlvpLQWMuLZSEg205yu&metric=coverage&token=sqb_d627f6302542b0308ffbc513f86b12002b2d4f49)](https://sonarqube.augusto-dev.com/dashboard?id=augustomarques_customer-registration_AYlvpLQWMuLZSEg205yu)
