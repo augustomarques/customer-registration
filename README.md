@@ -17,12 +17,12 @@
 
 #### The "customer-registration" project is a CRUD of customers and bank accounts.
 
-### How to use
+## How to use
 
 The project can be used in two ways: through the application hosted in the cloud or running locally through Docker.
 All API documentation has been generated through OpenAPI (Swagger) and can be accessed at swagger-ui/index.html.
 
-### Using cloud-hosted application
+## Using cloud-hosted application
 
 The application is hosted in:
 
@@ -36,7 +36,7 @@ The API documentation is available at:
 https://customer-registration.augusto-dev.com/swagger-ui/index.html
 ```
 
-### Running the application locally
+## Running the application locally
 
 To run the application it is necessary to have [Docker](https://docs.docker.com/desktop/install/linux-install/)
 and [Docker Compose](https://docs.docker.com/compose/install/) installed.
@@ -59,7 +59,7 @@ The metrics of the application are exposed through the [Actuator](http://localho
 http://localhost:8080/actuator
 ```
 
-### Language, framework and tools used:
+## Language, framework and tools used:
 
 - Kotlin and Spring
     - [Kotlin](https://kotlinlang.org/)
