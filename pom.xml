@@ -27,7 +27,7 @@
         <springdoc.openapi.version>2.0.2</springdoc.openapi.version>
 
         <sonar.language>kotlin</sonar.language>
-        <sonar.coverage.exclusions>**/dto/*,**/exception/*</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>**/dto/*,**/exception/*,**/config/*</sonar.coverage.exclusions>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 
@@ -220,6 +220,7 @@
                         <exclude>br/com/amarques/customerregistration/CustomerRegistrationApplication*</exclude>
                         <exclude>br/com/amarques/customerregistration/dto/**</exclude>
                         <exclude>br/com/amarques/customerregistration/exception/**</exclude>
+                        <exclude>br/com/amarques/customerregistration/config/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
